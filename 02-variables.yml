@@ -25,11 +25,11 @@
     #URL: play.example.com
     #vars_files:
     #- sample-vars.yml
-    #tasks:
-    #-name: Print URL
-      #ansible.builtin.debug:
-      #msg: URL == {{URL}}
-      #vars:
+    tasks:
+    -name: Print URL
+      ansible.builtin.debug:
+      msg: URL == {{URL}}
+      vars:
       URL: task.example.com
 
 
