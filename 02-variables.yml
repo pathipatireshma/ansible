@@ -30,7 +30,7 @@
       #ansible.builtin.debug:
       #msg: URL == {{URL}}
       #vars:
-      #URL: task.example.com
+      URL: task.example.com
 
 
 - name: Register a variable
@@ -39,3 +39,6 @@
     - name: Run uptime command
       ansible.builtin.shell: uptime
       register: OUT
+    - name: Print out variable
+      ansible.builtin.debug:
+        msg: "{{OUT.stdout}}"
