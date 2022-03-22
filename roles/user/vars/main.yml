@@ -2,5 +2,5 @@ COMPONENT: user
 APPTYPE: app
 
 LOG_FILES:
-  - /var/log/catalogue.log
+  - /var/log/user.log
 LOGTYPE: json
