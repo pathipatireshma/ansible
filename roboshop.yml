@@ -38,4 +38,12 @@
   roles:
     - user
 
+- name: Setup Cart Component
+  hosts: CART
+  become: yes
+  tags:
+    - cart
+  roles:
+    - cart
+
 
