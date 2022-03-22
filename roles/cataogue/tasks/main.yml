@@ -1,0 +1,9 @@
+#-name: setup Repo file for NodeJS
+# ansible.builtin.copy:
+#   src: nodejs.repo
+#   dest: /etc/yum.repos.d/nodejs.repo
+
+ - name: Import NodeJS role
+   ansible.builtin.import_role:
+     name: common
+     tasks_from: nodejs
