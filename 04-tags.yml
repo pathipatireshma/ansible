@@ -1,0 +1,9 @@
+- name: Tags
+  hosts: localhost
+  tasks:
+    - name: CentOS
+      debug:
+        msg: CentOS
+    - name: Ubuntu
+      debug:
+        msg: Ubuntu
