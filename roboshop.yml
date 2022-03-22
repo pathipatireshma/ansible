@@ -1,8 +1,8 @@
-#- name: Setup frontend Component
-#  hosts: FRONTEND
-#  become: yes
-#  roles:
-#    - frontend
+- name: Setup frontend Component
+  hosts: FRONTEND
+  become: yes
+  roles:
+    - frontend
 
 - name: Setup MongoDb Component
   hosts: MONGODB
@@ -15,6 +15,12 @@
   become: yes
   roles:
     - catalogue
+
+- name: Setup Redis Component
+  hosts: REDIS
+  become: yes
+  roles:
+    - redis
 
 
 
