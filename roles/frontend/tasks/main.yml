@@ -3,7 +3,7 @@
     name: nginx
     state: latest
 
-- name: Download frontend from Git repo and extarct it
+- name: Download Frontend from Git repo and Extract it
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
     dest: /tmp
@@ -37,3 +37,11 @@
     name: nginx
     state: restarted
     enabled: yes
+  when: strategy != "immutable"
+
+- name: Enable Nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: stopped
+    enabled: yes
+  when: strategy == "immutable"
