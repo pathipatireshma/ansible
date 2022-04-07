@@ -1,4 +1,4 @@
-- name: Setup frontend Component
+- name: Setup Frontend Component
   hosts: FRONTEND
   become: yes
   tags:
@@ -6,7 +6,7 @@
   roles:
     - frontend
 
-- name: Setup MongoDb Component
+- name: Setup MongoDB Component
   hosts: MONGODB
   become: yes
   tags:
@@ -46,7 +46,7 @@
   roles:
     - cart
 
-- name: Setup Mysql Component
+- name: Setup MySQL Component
   hosts: MYSQL
   become: yes
   tags:
@@ -54,5 +54,34 @@
   roles:
     - mysql
 
+- name: Setup Shipping Component
+  hosts: SHIPPING
+  become: yes
+  tags:
+    - shipping
+  roles:
+    - shipping
 
+- name: Setup RabbitMQ Component
+  hosts: RABBITMQ
+  become: yes
+  tags:
+    - rabbitmq
+  roles:
+    - rabbitmq
 
+- name: Setup Payment Component
+  hosts: PAYMENT
+  become: yes
+  tags:
+    - payment
+  roles:
+    - payment
+
+- name: Setup Dispatch Component
+  hosts: DISPATCH
+  become: yes
+  tags:
+    - dispatch
+  roles:
+    - dispatch
