@@ -1,39 +1,45 @@
-- name: Setup Mysql Repo
+- name: Setup MySQL Repo
   ansible.builtin.copy:
     src: mysql.repo
-    desc: /etc/yum.repos.d/mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
 
-- name: Install mysql server
+- name: Install MySQL Server
   ansible.builtin.yum:
     name:
-     - mysql-community-server
-     - MySQL-python
-    state: Installed
+      - mysql-community-server
+      - MySQL-python
+    state: installed
 
-- name: Start mysql service
+- name: Start MySQL Service
   ansible.builtin.systemd:
     name: mysqld
     state: started
     enabled: true
 
 - name: Check if new password is working
-  mysql_info:
-    login_user: root
-    login_password: RoboShop1
-    filter: databases
-  ignore_errors: yes
+  shell: echo "show databases" | mysql -uroot -p"{{MYSQL_NEW_PASSWORD}}"
   register: check_pass
+  ignore_errors: yes
 
-- name: Find the temporary password
-  ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
-  register: mysql_output
+- name: Password Change Block
   when: check_pass.failed
+  block:
+    - name: Find the temporary password
+      ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
+      register: mysql_output
 
-- name: Copy Password Reset SQL
-  ansible.builtin.template:
-    src: pass-reset.sql
-    dest: /tmp/pass.sql
+    - name: Copy Password Reset SQL
+      ansible.builtin.template:
+        src: pass-reset.sql
+        dest: /tmp/pass.sql
 
-- name: Change default password
-  ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{mysql_output.stdout}}" </tmp/pass.sql
-  when: check_pass.failed
+    - name: Change Default password
+      ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{mysql_output.stdout}}" </tmp/pass.sql
+
+- name: Download Database Code
+  import_role:
+    name: common
+    tasks_from: download
+
+- name: Load Schema
+  shell: mysql -uroot -p"{{MYSQL_NEW_PASSWORD}}" </tmp/mysql-main/shipping.sql

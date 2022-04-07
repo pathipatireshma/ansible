@@ -8,7 +8,7 @@
     name: mongodb-org
     state: installed
 
-- name: Update MongoDb Listen Address
+- name: Update MongoDB Listen address
   ansible.builtin.replace:
     path: /etc/mongod.conf
     regexp: '127.0.0.1'
@@ -20,16 +20,11 @@
     state: restarted
     enabled: yes
 
-#- name: Download {{COMPONENT}} from Git repo and Extract it
-#  ansible.builtin.unarchive:
-#    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
-#    dest: /tmp
-#    remote_src: yes
-
-- name: Download Database Code
-  import_role:
-    name: common
-    tasks_from: download
+- name: Download {{COMPONENT}} from Git repo and Extract it
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
+    dest: /tmp
+    remote_src: yes
 
 - name: Load Schema
   shell: mongo < "/tmp/mongodb-main/{{item}}.js"
