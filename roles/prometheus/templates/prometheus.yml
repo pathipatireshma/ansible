@@ -10,8 +10,6 @@ alerting:
         - targets:
             - localhost:9093
 
-rule_files:
-  - alerts.yml
 
 
 # A scrape configuration containing exactly one endpoint to scrape:
@@ -32,7 +30,6 @@ scrape_configs:
 
     ec2_sd_configs:
       - region: us-east-1 ## N. Virginia
-
           port: 9100
           filters:
             - name: "tag:Monitor"
