@@ -31,4 +31,4 @@ scrape_configs:
         target_label: "env"
     ec2_sd_configs:
       - region: us-east-1 ## N. Virginia
-         port: 9100
+        port: 9100
