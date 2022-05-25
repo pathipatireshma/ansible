@@ -35,4 +35,5 @@ scrape_configs:
 #        access_key: {{AWS_ACCESS_KEY}}
 #        secret_key: {{AWS_SECRET_KEY}}
 {% endraw %}
-     port: 9100
+
+        port: 9100
