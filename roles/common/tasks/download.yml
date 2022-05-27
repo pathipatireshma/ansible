@@ -15,9 +15,9 @@
     state: directory
   become_user: roboshop
 
-- name: Download {{COMPONENT}} from Nexus and extract it
-  ansible.builtin.unarchive:
-    src: http://172.31.9.227:8081/repository/{{COMPONENT}}/{{COMPONENT}}-v{{APP_VERSION}}.zip
-    dest: /home/roboshop/{{COMPONENT}}
-    remote_src: yes
-  become_user: roboshop
+#- name: Download {{COMPONENT}} from Nexus and extract it
+#  ansible.builtin.unarchive:
+#    src: http://172.31.9.227:8081/repository/{{COMPONENT}}/{{COMPONENT}}-v{{APP_VERSION}}.zip
+#    dest: /home/roboshop/{{COMPONENT}}
+#    remote_src: yes
+#  become_user: roboshop
