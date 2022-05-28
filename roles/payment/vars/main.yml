@@ -1,5 +1,6 @@
+
 COMPONENT: payment
 APPTYPE: app
-#LOG_FILES:
-#   - /var/log/payment.log
-#LOGTYPE: raw
+LOG_FILES:
+   - /var/log/payment.log
+LOGTYPE: raw
