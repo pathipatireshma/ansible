@@ -12,10 +12,10 @@ receivers:
         smarthost: "email-smtp.us-east-1.amazonaws.com:587"
         auth_username: "{{SES_USER}}"
         auth_password: "{{SES_PASS}}"
-        ignore_errors: yes
 inhibit_rules:
   - source_match:
       severity: 'critical'
     target_match:
       severity: 'warning'
     equal: ['alertname', 'dev', 'instance']
+    ignore_errors: yes
